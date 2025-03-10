@@ -24,10 +24,10 @@ html {
 
 @media (max-width: 500px) { 
     .txt-loading {
-        font-size: 1rem !important;
+        font-size: 2rem !important;
     }
     .letters-loading {
-        font-size: 1rem !important;
+        font-size: 2rem !important;
     }
 }
 
