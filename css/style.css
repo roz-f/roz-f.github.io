@@ -21,15 +21,6 @@ html {
   width: 100%;
 }
 
-@media (max-width: 500px) { 
-    .txt-loading {
-        font-size: 2em !important;
-    }
-    .letters-loading {
-        font-size: 2em !important;
-    }
-}
-
 .kiki {
   margin-top: 3.5em !important;
 }
