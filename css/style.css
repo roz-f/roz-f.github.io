@@ -18,16 +18,15 @@ body,
 html {
   height: 100%;
   overflow-x: hidden !important;
-  overflow-y: auto !important;
   width: 100%;
 }
 
 @media (max-width: 500px) { 
     .txt-loading {
-        font-size: 2rem !important;
+        font-size: 2em !important;
     }
     .letters-loading {
-        font-size: 2rem !important;
+        font-size: 2em !important;
     }
 }
 
