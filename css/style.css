@@ -14,6 +14,12 @@ Version: 3.0
   max-width: 100%;
 }
 
+@media (max-width: 500px) {
+  .txt-loading {
+    font-size: 2.4em !important;
+  }
+}
+
 body,
 html {
   height: 100%;
