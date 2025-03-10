@@ -23,7 +23,7 @@ html {
 
 @media (max-width: 500px) { 
     .txt-loading {
-        font-size: 2rem;
+        font-size: 1rem;
     }
 }
 
