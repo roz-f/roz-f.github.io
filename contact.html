@@ -50,7 +50,7 @@
     const userName = document.getElementById("name").value;
     const userEmail = document.getElementById("email").value;
     const userSubject = document.getElementById("subject").value;
-    const userMessage = document.getElementsByName("message")[0].value;
+    const userMessage = document.querySelector("textarea").value;
 
     const templateParams = {
       to_name: "Retostella Foundation",
@@ -65,13 +65,25 @@
         function (response) {
           console.log("SUCCESS!", response.status, response.text);
           alert("Thank You, Retostella Foundation has received your message.");
-          window.location.href = "https://retostella.org";
+
+          // Clear form fields
+          document.getElementById("name").value = "";
+          document.getElementById("email").value = "";
+          document.getElementById("subject").value = "";
+          document.querySelector("textarea").value = "";
+
+          // Redirect after a slight delay
+          setTimeout(() => {
+            window.location.href = "https://retostella.org";
+          }, 1500);
         },
         function (error) {
           console.log("FAILED...", error);
-          alert("Oops! Something went wrong. Please try again.");
-          button.innerHTML = "Send Message <i class='fas fa-arrow-right'></i>"; // Reset button text
-          button.disabled = false; // Re-enable button
+          alert(`Oops! Something went wrong. Error: ${error.text}`);
+
+          // Reset button text and re-enable it
+          button.innerHTML = "Send Message <i class='fas fa-arrow-right'></i>";
+          button.disabled = false;
         }
       );
   }
