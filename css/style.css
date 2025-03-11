@@ -26,6 +26,13 @@ html {
   }
 }
 
+@media (max-width: 767px) {
+  .zigi {
+            max-width: 100% !important;
+            margin: 0 auto;
+        }
+}
+
 .kiki {
   margin-top: 3.5em !important;
 }
