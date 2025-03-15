@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
   (function () {
-    emailjs.init({ publicKey: "WxJ7exaVRpnLOH3IG" });
+    emailjs.init({ publicKey: "dwUgOUeOGw-ioWPJc" });
   })();
 
   function sendEmail(event) {
@@ -76,15 +76,10 @@
           document.getElementById("email").value = "";
           document.getElementById("subject").value = "";
           document.querySelector("textarea").value = "";
-
-          // Redirect after a slight delay
-          setTimeout(() => {
-            window.location.href = "https://retostella.org";
-          }, 1500);
         },
         function (error) {
           console.log("FAILED...", error);
-          alert(`Oops! Something went wrong. Error: ${error.text}`);
+          alert(`Oops! Something went wrong.`);
 
           // Reset button text and re-enable it
           button.innerHTML = "Send Message <i class='fas fa-arrow-right'></i>";
