@@ -38,9 +38,7 @@
 
 <script type="text/javascript">
   (function () {
-    emailjs.init({
-      publicKey: "WxJ7exaVRpnLOH3IG",
-    });
+    emailjs.init({ publicKey: "WxJ7exaVRpnLOH3IG" });
   })();
 
   function sendEmail(event) {
@@ -54,6 +52,9 @@
     const userEmail = document.getElementById("email").value;
     const userSubject = document.getElementById("subject").value;
     const userMessage = document.querySelector("textarea").value;
+    
+    // Capture user local time
+    const userTime = new Date().toLocaleString(); 
 
     const templateParams = {
       to_name: "Retostella Foundation",
@@ -61,6 +62,7 @@
       from_email: userEmail,
       subject: userSubject,
       message: userMessage,
+      time: userTime // Add user time to email parameters
     };
 
     emailjs.send("service_qfp8d9o", "template_zmw4isb", templateParams)
