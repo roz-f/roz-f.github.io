@@ -30,7 +30,58 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- template main style css file -->
     <link rel="stylesheet" href="style.css">
-    
+
+    <script type="text/javascript">
+  (function () {
+    emailjs.init({
+      publicKey: "dwUgOUeOGw-ioWPJc", // Your public key
+    });
+  })();
+
+  // Function to handle newsletter subscription
+  function subscribeNewsletter(event) {
+    event.preventDefault(); // Prevent page reload
+
+    let subscribeButton = document.getElementById("btnsubscribe");
+
+    subscribeButton.disabled = true;
+    subscribeButton.innerHTML = "Subscribing..."; // Change button text to indicate subscribing
+
+    const subscriberEmail = document.getElementById("email-input").value;
+
+    // Template parameters for emailjs
+    const templateParams = {
+      to_name: "Retostella Foundation",
+      from_name: "New Subscriber", // You can keep this static for simplicity
+      from_email: subscriberEmail,
+      subject: "Newsletter Subscription",
+      message: "Hurray! You have a new subscriber", // Example message, can be customized
+    };
+
+    // Send the email using emailjs
+    emailjs.send("service_qfp8d9o", "template_r7tt9k5", templateParams)
+      .then(
+        function (response) {
+          console.log("Subscription successful!", response.status, response.text);
+          alert("You have successfully subscribed to our newsletter!");
+
+          // Reset input and button
+          document.getElementById("email-input").value = "";
+          subscribeButton.innerHTML = "Subscribe <i class='fas fa-arrow-right'></i>";
+          subscribeButton.disabled = false;
+        },
+        function (error) {
+          console.log("Subscription failed...", error);
+          alert(`Subscription failed. Please try again. Error: ${error.text}`);
+
+          // Reset button
+          subscribeButton.innerHTML = "Subscribe <i class='fas fa-arrow-right'></i>";
+          subscribeButton.disabled = false;
+        }
+      );
+  }
+</script>
+
 </head>
 
 <body class="body-wrapper">    
