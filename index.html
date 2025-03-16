@@ -38,9 +38,12 @@
 
 <script type="text/javascript">
   (function () {
-    emailjs.init({ publicKey: "dwUgOUeOGw-ioWPJc" });
+    emailjs.init({
+      publicKey: "dwUgOUeOGw-ioWPJc",
+    });
   })();
 
+  // Function to send contact form messages
   function sendEmail(event) {
     event.preventDefault();
 
@@ -52,9 +55,6 @@
     const userEmail = document.getElementById("email").value;
     const userSubject = document.getElementById("subject").value;
     const userMessage = document.querySelector("textarea").value;
-    
-    // Capture user local time
-    const userTime = new Date().toLocaleString(); 
 
     const templateParams = {
       to_name: "Retostella Foundation",
@@ -62,7 +62,6 @@
       from_email: userEmail,
       subject: userSubject,
       message: userMessage,
-      time: userTime // Add user time to email parameters
     };
 
     emailjs.send("service_qfp8d9o", "template_r7tt9k5", templateParams)
@@ -76,14 +75,62 @@
           document.getElementById("email").value = "";
           document.getElementById("subject").value = "";
           document.querySelector("textarea").value = "";
+
+          // Redirect after a slight delay
+          setTimeout(() => {
+            window.location.href = "https://retostella.org";
+          }, 1500);
         },
         function (error) {
           console.log("FAILED...", error);
-          alert(`Oops! Something went wrong.`);
+          alert(`Oops! Something went wrong. Error: ${error.text}`);
 
           // Reset button text and re-enable it
           button.innerHTML = "Send Message <i class='fas fa-arrow-right'></i>";
           button.disabled = false;
+        }
+      );
+  }
+
+  // Function to handle newsletter subscription
+  function subscribeNewsletter(event) {
+    event.preventDefault(); // Prevent page reload
+
+    let emailInput = document.getElementById("email-input");
+    let subscribeButton = document.getElementById("btnsubscribe");
+
+    subscribeButton.disabled = true;
+    subscribeButton.innerHTML = "Subscribing...";
+
+    const subscriberEmail = document.getElementById("email-input").value;
+
+    const templateParams = {
+        to_name: "Retostella Foundation",
+        from_name: "New Subscriber",
+        from_email: "Subscriber Email Saved",
+        subject: "Newsletter Subscription",
+        message: "Hurray! You have a new subscriber",
+        subscriber: subscriberEmail,
+    };
+
+    emailjs.send("service_qfp8d9o", "template_r7tt9k5", templateParams)
+      .then(
+        function (response) {
+          console.log("Subscription successful!", response.status, response.text);
+          alert("You have successfully subscribed to our newsletter!");
+
+          // Reset input and button
+          document.getElementById("email-input").value = "";
+          subscribeButton.innerHTML = "Subscribe <i class='fas fa-arrow-right'></i>";
+          subscribeButton.disabled = false;
+        },
+        function (error) {
+          console.log("Subscription failed...", error);
+          alert(`Subscription failed. Please try again. Error: ${error.text}`);
+
+          // Reset button
+          subscribeButton.innerHTML = "Subscribe <i class='fas fa-arrow-right'></i>";
+          subscribeButton.disabled = false;
         }
       );
   }
@@ -522,11 +569,14 @@
         <div class="cta-content">
             <div class="row align-items-center">
                 <div class="col-xl-7 text-white col-12 text-center text-xl-left">
-                    <h1>Empowering Youths Through Digital Literacy & Entrepreneurship</h1>
+                    <h1>Stay Inspired! Subscribe to the Retostella Foundation Newsletter</h1>
                 </div>
                 <div class="col-xl-5 col-12 text-center text-xl-right">
-                    <a href="contact" class="theme-btn mt-4 mt-xl-0">Join the Movement <i class="fas fa-arrow-right"></i></a>
-                    <a href="about" class="ml-sm-3 mt-4 mt-xl-0 theme-btn minimal-btn">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <!-- Newsletter Subscription Form -->
+                    <form id="newsletter-form" onsubmit="subscribeNewsletter(event)" class="d-inline-flex align-items-center">
+                        <input type="email" id="email-input" name="email" class="form-control p-3 " placeholder="Enter your email..." required>
+                        <button type="submit" id="btnsubscribe" class="ml-sm-3 mt-4 mt-xl-0 theme-btn minimal-btn border-0">Subscribe </button>
+                    </form>
                 </div>
             </div>
         </div>
