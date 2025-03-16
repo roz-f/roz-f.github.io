@@ -32,56 +32,52 @@
     <link rel="stylesheet" href="style.css">
 
     <script type="text/javascript">
-  (function () {
-    emailjs.init({
-      publicKey: "dwUgOUeOGw-ioWPJc", // Your public key
-    });
-  })();
+        (function () {
+            emailjs.init({ publicKey: "dwUgOUeOGw-ioWPJc" });
+        })();
 
-  // Function to handle newsletter subscription
-  function subscribeNewsletter(event) {
-    event.preventDefault(); // Prevent page reload
+        function subscribeNewsletter(event) {
+            event.preventDefault(); // Prevent page reload
 
-    let subscribeButton = document.getElementById("btnsubscribe");
+            let emailInput = document.getElementById("email-input");
+            let subscribeButton = document.getElementById("btnsubscribe");
 
-    subscribeButton.disabled = true;
-    subscribeButton.innerHTML = "Subscribing..."; // Change button text to indicate subscribing
+            subscribeButton.disabled = true;
+            subscribeButton.innerHTML = "Subscribing...";
 
-    const subscriberEmail = document.getElementById("email-input").value;
+            const subscriberEmail = document.getElementById("email-input").value;
 
-    // Template parameters for emailjs
-    const templateParams = {
-        to_name: "Retostella Foundation",
-        from_name: "New Subscriber",
-        from_email: "Subscriber Email Saved",
-        subject: "Newsletter Subscription",
-        message: "Hurray! You have a new subscriber",
-        subscriber: subscriberEmail,
-    };
+            const templateParams = {
+                to_name: "Retostella Foundation",
+                from_name: "New Subscriber",
+                from_email: "Subscriber Email Saved",
+                subject: "Newsletter Subscription",
+                message: "Hurray! You have a new subscriber",
+                subscriber: subscriberEmail,
+            };
 
-    // Send the email using emailjs
-    emailjs.send("service_qfp8d9o", "template_r7tt9k5", templateParams)
-      .then(
-        function (response) {
-          console.log("Subscription successful!", response.status, response.text);
-          alert("You have successfully subscribed to our newsletter!");
+            emailjs.send("service_qfp8d9o", "template_r7tt9k5", templateParams)
+            .then(
+                function (response) {
+                console.log("Subscription successful!", response.status, response.text);
+                alert("You have successfully subscribed to our newsletter!");
 
-          // Reset input and button
-          document.getElementById("email-input").value = "";
-          subscribeButton.innerHTML = "Subscribe <i class='fas fa-arrow-right'></i>";
-          subscribeButton.disabled = false;
-        },
-        function (error) {
-          console.log("Subscription failed...", error);
-          alert(`Subscription failed. Please try again.`);
+                // Reset input and button
+                document.getElementById("email-input").value = "";
+                subscribeButton.innerHTML = "Subscribe <i class='fas fa-arrow-right'></i>";
+                subscribeButton.disabled = false;
+                },
+                function (error) {
+                console.log("Subscription failed...", error);
+                alert(`Subscription failed. Please try again. Error: ${error.text}`);
 
-          // Reset button
-          subscribeButton.innerHTML = "Subscribe <i class='fas fa-arrow-right'></i>";
-          subscribeButton.disabled = false;
+                // Reset button
+                subscribeButton.innerHTML = "Subscribe <i class='fas fa-arrow-right'></i>";
+                subscribeButton.disabled = false;
+                }
+            );
         }
-      );
-  }
-</script>
+    </script>
 
 </head>
 
